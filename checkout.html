@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comanditas — Confirmar pedido</title>
+  <meta name="description" content="Comanditas — Confirmá tu pedido y envialo por WhatsApp." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="checkout.css?v=4" />
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="header__inner">
+      <a href="index.html" class="header__back" aria-label="Volver al menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+      <span class="header__title">Tu pedido</span>
+      <span class="demo-tag">Demo</span>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page">
+      <section class="resumen" id="resumenSection">
+        <h2 class="resumen__title">Resumen</h2>
+        <div class="resumen__items" id="resumenItems"></div>
+        <div class="resumen__divider"></div>
+        <div class="resumen__row">
+          <span>Subtotal</span>
+          <span id="resumenSubtotal">$0</span>
+        </div>
+        <div class="resumen__row" id="resumenEnvioRow">
+          <span id="resumenEnvioLabel">Envío</span>
+          <span id="resumenEnvio">$0</span>
+        </div>
+
+        <div class="cupon-block">
+          <label class="form-label" for="inputCupon">Cupón de descuento</label>
+          <div class="cupon-row">
+            <input class="form-input" type="text" id="inputCupon" placeholder="Ingresá tu código" style="text-transform:uppercase" />
+            <button class="cupon-btn" onclick="aplicarCuponDemo()">Aplicar</button>
+          </div>
+          <p class="cupon-msg" id="cuponMsg"></p>
+          <p class="cupon-hint">Probá: <strong>COMANDITA10</strong> (10% off) o <strong>COMANDITA500</strong> ($500 off)</p>
+        </div>
+
+        <div class="resumen__row resumen__row--descuento" id="resumenDescuentoRow" style="display:none">
+          <span>Descuento</span>
+          <span id="resumenDescuento">-$0</span>
+        </div>
+        <div class="resumen__row resumen__row--total">
+          <span>Total</span>
+          <span id="resumenTotal">$0</span>
+        </div>
+        <p class="resumen__tiempo" id="resumenTiempo"></p>
+      </section>
+
+      <section class="form-section">
+        <h2 class="form-section__title">Datos del pedido</h2>
+
+        <div class="form-group">
+          <label class="form-label" for="inputNombre">Nombre</label>
+          <input class="form-input" type="text" id="inputNombre" placeholder="Tu nombre" autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inputTelefono">Teléfono</label>
+          <input class="form-input" type="tel" id="inputTelefono" placeholder="Ej: 3534123456" autocomplete="tel" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">¿Cómo lo recibís?</label>
+          <div class="options" id="optionsEntrega">
+            <button class="option-btn" onclick="seleccionar('entrega','retiro',this)">Retiro en local</button>
+            <button class="option-btn" onclick="seleccionar('entrega','envio',this)">Envío a domicilio</button>
+          </div>
+        </div>
+
+        <div class="form-group" id="campoDireccion" style="display:none">
+          <label class="form-label" for="inputDireccion">Dirección</label>
+          <input class="form-input" type="text" id="inputDireccion" placeholder="Calle y número" autocomplete="street-address" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">¿Cómo pagás?</label>
+          <div class="options" id="optionsPago">
+            <button class="option-btn" onclick="seleccionar('pago','efectivo',this)">Efectivo</button>
+            <button class="option-btn" onclick="seleccionar('pago','transferencia',this)">Transferencia</button>
+            <button class="option-btn" onclick="seleccionar('pago','mp',this)">MercadoPago</button>
+          </div>
+        </div>
+
+        <div class="form-group" id="campoTransferencia" style="display:none">
+          <p class="form-note">Alias: <strong id="aliasTransferencia">comanditas.mp</strong></p>
+          <button class="copy-btn" onclick="copiarAlias()">Copiar alias</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inputObs">Observaciones (opcional)</label>
+          <textarea class="form-input form-textarea" id="inputObs" placeholder="Ej: sin cebolla, extra picante..." rows="2"></textarea>
+        </div>
+
+        <button class="submit-btn" id="submitBtn" onclick="enviarPedido()">
+          <svg class="submit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          <span class="submit-text">Enviar por WhatsApp</span>
+          <span class="submit-spinner" style="display:none"></span>
+        </button>
+      </section>
+    </div>
+  </main>
+
+  <a class="admin-fab" href="admin.html" aria-label="Panel de administración" title="Panel admin (demo)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+  </a>
+
+  <div class="theme-fab" onclick="togglePanelTemas()" aria-label="Cambiar estilo del sitio" role="button" tabindex="0" onkeydown="if(event.key==='Enter')togglePanelTemas()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <span>Demo de presentación &middot; Hecho con <strong>Comanditas</strong></span>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js?v=4"></script>
+  <script src="js/themes.js?v=4"></script>
+  <script src="js/carrito.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
+</body>
+</html>

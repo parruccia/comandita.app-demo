@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comanditas Admin — Panel de control</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css?v=4" />
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="admin-header__inner">
+      <div class="admin-header__left">
+        <span class="admin-logo">Comanditas</span>
+        <span class="admin-badge">Demo</span>
+      </div>
+      <div class="admin-header__right">
+        <span class="admin-pill" id="adminHours"></span>
+        <button class="admin-reset-btn" onclick="resetDemo()">Reiniciar demo</button>
+        <a href="index.html" class="admin-link">Ver sitio →</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-page">
+
+      <div class="admin-stats">
+        <div class="admin-stat">
+          <div class="admin-stat__value" id="statPedidos">0</div>
+          <div class="admin-stat__label">Pedidos hoy</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat__value" id="statFacturacion">$0</div>
+          <div class="admin-stat__label">Facturación</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat__value" id="statProductos">0</div>
+          <div class="admin-stat__label">Productos activos</div>
+        </div>
+        <div class="admin-stat">
+          <div class="admin-stat__value admin-stat__value--accent" id="statAgotados">0</div>
+          <div class="admin-stat__label">Agotados</div>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+
+        <section class="admin-card">
+          <div class="admin-card__header">
+            <h2 class="admin-card__title">Pedidos recientes</h2>
+            <span class="admin-card__tag">Demo — datos de ejemplo</span>
+          </div>
+          <div class="admin-card__body">
+            <div class="order-table" id="orderTable"></div>
+            <p class="admin-note">Este es un panel de demostración. Los datos son de ejemplo y no se guardan.</p>
+          </div>
+        </section>
+
+        <section class="admin-card">
+          <div class="admin-card__header">
+            <h2 class="admin-card__title">Menú</h2>
+            <span class="admin-card__tag">Toggle agotado</span>
+          </div>
+          <div class="admin-card__body">
+            <div id="menuList"></div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <div class="theme-fab" onclick="togglePanelTemas()" aria-label="Cambiar estilo del sitio" role="button" tabindex="0" onkeydown="if(event.key==='Enter')togglePanelTemas()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </div>
+
+  <script src="js/data.js?v=4"></script>
+  <script src="js/themes.js?v=4"></script>
+  <script src="admin.js?v=4"></script>
+</body>
+</html>

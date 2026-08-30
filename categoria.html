@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comanditas — Categoría</title>
+  <meta name="description" content="Comanditas — Explorá nuestro menú." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="categoria.css?v=4" />
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="header__inner">
+      <a href="index.html" class="header__back" aria-label="Volver al menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+      <span class="header__title" id="pageTitle">Categoría</span>
+      <div class="header__right">
+        <span class="demo-tag">Demo</span>
+        <button class="cart-btn" onclick="toggleDrawer()" aria-label="Abrir carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="category-hero" id="categoryHero">
+      <img class="category-hero__img" id="categoryHeroImg" src="" alt="" />
+      <div class="category-hero__overlay">
+        <h1 class="category-hero__title" id="categoryTitle"></h1>
+      </div>
+    </div>
+    <section class="section">
+      <div class="products" id="productsList"></div>
+    </section>
+  </main>
+
+  <div class="sticky-cart" id="stickyCart" onclick="toggleDrawer()">
+    <span class="sticky-cart__info"><strong id="stickyCount">0</strong> items</span>
+    <span class="sticky-cart__total" id="stickyTotal">$0</span>
+    <span class="sticky-cart__cta">Ver mi pedido →</span>
+  </div>
+
+  <a class="admin-fab" href="admin.html" aria-label="Panel de administración" title="Panel admin (demo)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+  </a>
+
+  <div class="theme-fab" onclick="togglePanelTemas()" aria-label="Cambiar estilo del sitio" role="button" tabindex="0" onkeydown="if(event.key==='Enter')togglePanelTemas()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <span>Demo de presentación &middot; Hecho con <strong>Comanditas</strong></span>
+  </footer>
+
+  <div id="overlay" class="overlay" onclick="toggleDrawer()"></div>
+
+  <aside class="drawer" id="drawer" role="dialog" aria-label="Carrito de compras" aria-modal="true">
+    <div class="drawer__header">
+      <span class="drawer__title">Tu pedido</span>
+      <button class="drawer__close" onclick="toggleDrawer()" aria-label="Cerrar carrito">&#10005;</button>
+    </div>
+    <div class="drawer__items" id="drawerItems">
+      <div class="drawer-empty">Tu carrito está vacío</div>
+    </div>
+    <div class="drawer__footer">
+      <div class="drawer__envio" id="drawerEnvio"></div>
+      <div class="drawer__total">
+        <span>Total</span>
+        <span id="drawerTotal">$0</span>
+      </div>
+      <button class="drawer__btn" onclick="handleCheckout()">Confirmar pedido</button>
+    </div>
+  </aside>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="cerrarModal()"></div>
+  <div class="modal" id="modalCustom">
+    <div class="modal__header">
+      <span class="modal__title" id="modalTitle">Personalizar</span>
+      <button class="modal__close" onclick="cerrarModal()" aria-label="Cerrar">&#10005;</button>
+    </div>
+    <div class="modal__body" id="modalBody"></div>
+    <div class="modal__footer">
+      <div class="modal__price" id="modalPrice">$0</div>
+      <button class="modal__btn" id="modalConfirmBtn">Agregar al carrito</button>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="cerrarLightbox(event)">
+    <button class="lightbox__close" onclick="cerrarLightbox(event)" aria-label="Cerrar imagen">&#10005;</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+    <div class="lightbox__name" id="lightboxName"></div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js?v=4"></script>
+  <script src="js/themes.js?v=4"></script>
+  <script src="js/carrito.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
+</body>
+</html>

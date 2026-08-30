@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comanditas — Demo</title>
+  <meta name="description" content="Comanditas — Tu comanda, lista en minutos. Pedí online y recibilo en tu casa." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css?v=5" />
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">Comanditas</a>
+      <div class="header__right">
+        <span class="demo-tag">Demo</span>
+        <span class="hours-pill" id="hoursPill"></span>
+        <button class="cart-btn" onclick="toggleDrawer()" aria-label="Abrir carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================ -->
+    <!-- HERO: La primera impresión del cliente       -->
+    <!-- ============================================ -->
+    <section class="hero">
+      <div class="hero__content">
+        <p class="hero__tagline">TU NEGOCIO &middot; TU CIUDAD</p>
+        <h1 class="hero__title">Tu comanda,<br/>lista en minutos</h1>
+        <button class="hero__cta" onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Hacer mi pedido
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- DEMO NOTICE: Aviso elegante para el cliente   -->
+    <!-- ============================================ -->
+    <section class="demo-notice">
+      <div class="demo-notice__inner">
+        <h2 class="demo-notice__title">Esto es una demostración</h2>
+        <p class="demo-notice__text">El diseño, los colores y los productos que ves acá son solo un ejemplo. Tu&nbsp;app&nbsp;se&nbsp;arma 100% a la medida de tu negocio: tu&nbsp;nombre, tu&nbsp;carta, tus&nbsp;tiempos, tu&nbsp;identidad.</p>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- QUICK DATA: Info clave del comercio          -->
+    <!-- ============================================ -->
+    <section class="quick-data">
+      <div class="quick-data__item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>20-30 min</span>
+      </div>
+      <div class="quick-data__divider"></div>
+      <div class="quick-data__item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Envío o retiro</span>
+      </div>
+      <div class="quick-data__divider"></div>
+      <div class="quick-data__item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Cupones activos</span>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- HOW IT WORKS: El recorrido del cliente       -->
+    <!-- ============================================ -->
+    <section class="how-it-works">
+      <h2 class="section-title">Hoy se arma así</h2>
+      <p class="section-subtitle">Elegís, confirmás y lo tenés en minutos</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step__number">1</div>
+          <div class="step__text">
+            <strong>Armás tu pedido</strong>
+            <span>Elegí lo que querés del menú</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__number">2</div>
+          <div class="step__text">
+            <strong>Confirmás por WhatsApp</strong>
+            <span>Te contactamos al instante</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__number">3</div>
+          <div class="step__text">
+            <strong>Lo retirás o te llega</strong>
+            <span>En minutos, donde estés</span>
+          </div>
+        </div>
+      </div>
+      <button class="cta-btn" onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">
+        Empezar pedido
+      </button>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MENÚ: Lo que el cliente va a elegir          -->
+    <!-- ============================================ -->
+    <section class="section" id="menuSection">
+      <div class="section-header">
+        <span class="section-label">Tu menú</span>
+        <h2 class="section-title">Elegí lo que quieras</h2>
+        <p class="section-subtitle">Probá agregar productos al carrito — el flujo funciona en tiempo real</p>
+      </div>
+      <div class="grid" id="gridCategorias"></div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FEATURES: Lo que el dueño recibe             -->
+    <!-- ============================================ -->
+    <section class="features">
+      <div class="features__inner">
+        <span class="section-label">¿Qué incluye?</span>
+        <h2 class="section-title">Todo lo que necesitás</h2>
+        <p class="section-subtitle">Un sistema completo, sin mensualidades ocultas</p>
+        <div class="features__grid">
+          <div class="feature">
+            <div class="feature__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <strong>Sitio web propio</strong>
+            <span>Tu marca, tu diseño, tu dominio</span>
+          </div>
+          <div class="feature">
+            <div class="feature__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            </div>
+            <strong>Pedidos por WhatsApp</strong>
+            <span>Sin apps, sin intermediarios</span>
+          </div>
+          <div class="feature">
+            <div class="feature__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <strong>Panel de control</strong>
+            <span>Gestioná el menú desde tu celular</span>
+          </div>
+          <div class="feature">
+            <div class="feature__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <strong>Listo en minutos</strong>
+            <span>Sin demoras, sin fricción</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA FINAL: Call to action para cerrar        -->
+    <!-- ============================================ -->
+    <section class="final-cta">
+      <div class="final-cta__inner">
+        <h2 class="final-cta__title">¿Te gusta lo que ves?</h2>
+        <p class="final-cta__text">Esta es una demo interactiva. Todo lo que ves acá se adapta al 100% a tu negocio.</p>
+        <div class="final-cta__actions">
+          <a href="admin.html" class="final-cta__btn final-cta__btn--secondary">Ver panel admin →</a>
+          <button class="final-cta__btn final-cta__btn--primary" onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">Probar el menú</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- STICKY CART -->
+  <div class="sticky-cart" id="stickyCart" onclick="toggleDrawer()">
+    <span class="sticky-cart__info"><strong id="stickyCount">0</strong> items</span>
+    <span class="sticky-cart__total" id="stickyTotal">$0</span>
+    <span class="sticky-cart__cta">Ver mi pedido →</span>
+  </div>
+
+  <!-- FABs -->
+  <a class="admin-fab" href="admin.html" aria-label="Panel de administración" title="Panel admin (demo)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+  </a>
+
+  <div class="theme-fab" onclick="togglePanelTemas()" aria-label="Cambiar estilo del sitio" role="button" tabindex="0" onkeydown="if(event.key==='Enter')togglePanelTemas()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__info">
+      <span id="footerDireccion"></span>
+      <span id="footerHorarios"></span>
+    </div>
+    <a class="footer__ig" id="footerInstagram" href="#" target="_blank" rel="noopener">Instagram</a>
+    <div class="footer__demo">Demo de presentación &middot; <a href="admin.html">Ver panel admin</a> &middot; Hecho con <strong>Comanditas</strong></div>
+  </footer>
+
+  <!-- CLOSED NOTICE -->
+  <div class="closed-notice" id="closedNotice">
+    <div class="closed-notice__inner">
+      <div class="closed-notice__icon">🔒</div>
+      <h2 class="closed-notice__title">Estamos cerrados</h2>
+      <p class="closed-notice__hours">Abrimos mañana a las 12:00</p>
+      <p class="closed-notice__sub">Pero podés mirar el menú y armar tu pedido para después</p>
+    </div>
+  </div>
+
+  <!-- DRAWER -->
+  <div id="overlay" class="overlay" onclick="toggleDrawer()"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-label="Carrito de compras" aria-modal="true">
+    <div class="drawer__header">
+      <span class="drawer__title">Tu pedido</span>
+      <button class="drawer__close" onclick="toggleDrawer()" aria-label="Cerrar carrito">&#10005;</button>
+    </div>
+    <div class="drawer__items" id="drawerItems">
+      <div class="drawer-empty">Tu carrito está vacío</div>
+    </div>
+    <div class="drawer__footer">
+      <div class="drawer__envio" id="drawerEnvio"></div>
+      <div class="drawer__total">
+        <span>Total</span>
+        <span id="drawerTotal">$0</span>
+      </div>
+      <button class="drawer__btn" onclick="handleCheckout()">Confirmar pedido</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js?v=5"></script>
+  <script src="js/themes.js?v=5"></script>
+  <script src="js/carrito.js?v=5"></script>
+  <script src="js/app.js?v=5"></script>
+</body>
+</html>
