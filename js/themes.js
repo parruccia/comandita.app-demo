@@ -97,9 +97,9 @@ window.THEMES = {
 };
 
 function aplicarTema(nombre) {
-  var t = window.THEMES[nombre];
+  const t = window.THEMES[nombre];
   if (!t) return;
-  var r = document.documentElement;
+  const r = document.documentElement;
   r.style.setProperty("--bg", t.bg);
   r.style.setProperty("--surface", t.surface);
   r.style.setProperty("--surface-alt", t.surfaceAlt);
@@ -119,57 +119,66 @@ function aplicarTema(nombre) {
 }
 
 function initTema() {
-  var guardado = localStorage.getItem("comanditas_theme") || "oscuro";
+  const guardado = localStorage.getItem("comanditas_theme") || "oscuro";
   aplicarTema(guardado);
 }
 
 function togglePanelTemas() {
-  var panel = document.getElementById("themePanel");
+  const panel = document.getElementById("themePanel");
   if (!panel) return;
-  var isOpen = panel.classList.contains("open");
+  const isOpen = panel.classList.contains("open");
   panel.classList.toggle("open");
-  var overlay = document.getElementById("themeOverlay");
+  const overlay = document.getElementById("themeOverlay");
   if (overlay) overlay.classList.toggle("open");
   document.body.style.overflow = isOpen ? "" : "hidden";
 }
 
 function actualizarSelector(nombre) {
-  var btns = document.querySelectorAll(".theme-option");
-  btns.forEach(function(btn) {
+  const btns = document.querySelectorAll(".theme-option");
+  btns.forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.theme === nombre);
   });
 }
 
 function buildThemePanel() {
-  var overlay = document.createElement("div");
+  const overlay = document.createElement("div");
   overlay.id = "themeOverlay";
   overlay.className = "theme-overlay";
-  overlay.onclick = togglePanelTemas;
+  overlay.addEventListener("click", togglePanelTemas);
 
-  var panel = document.createElement("div");
+  const panel = document.createElement("div");
   panel.id = "themePanel";
   panel.className = "theme-panel";
 
-  var html = '<div class="theme-panel__header">' +
+  let html = '<div class="theme-panel__header">' +
     '<span class="theme-panel__title">Estilos del sitio</span>' +
-    '<button class="theme-panel__close" onclick="togglePanelTemas()">&#10005;</button>' +
+    '<button class="theme-panel__close">&#10005;</button>' +
     '</div>' +
     '<p class="theme-panel__note">Este diseño es un ejemplo. Se adapta 100% a la marca de tu negocio.</p>' +
     '<div class="theme-options">';
 
-  var nombres = Object.keys(window.THEMES);
-  for (var i = 0; i < nombres.length; i++) {
-    var k = nombres[i];
-    var t = window.THEMES[k];
-    html += '<button class="theme-option" data-theme="' + k + '" onclick="aplicarTema(\'' + k + '\')">' +
-      '<span class="theme-swatch" style="background:' + t.btnGradient + '"></span>' +
-      '<span class="theme-emoji">' + t.emoji + '</span>' +
-      '<span class="theme-name">' + t.label + '</span>' +
-      '</button>';
+  const nombres = Object.keys(window.THEMES);
+  for (const k of nombres) {
+    const t = window.THEMES[k];
+    html += `<button class="theme-option" data-theme="${k}">
+      <span class="theme-swatch" style="background:${t.btnGradient}"></span>
+      <span class="theme-emoji">${t.emoji}</span>
+      <span class="theme-name">${t.label}</span>
+    </button>`;
   }
 
   html += '</div>';
   panel.innerHTML = html;
+
+  // Delegación dentro del panel (cerrar y elegir tema)
+  panel.addEventListener("click", (e) => {
+    if (e.target.closest(".theme-panel__close")) {
+      togglePanelTemas();
+      return;
+    }
+    const opt = e.target.closest("[data-theme]");
+    if (opt) aplicarTema(opt.dataset.theme);
+  });
 
   document.body.appendChild(overlay);
   document.body.appendChild(panel);
@@ -178,4 +187,13 @@ function buildThemePanel() {
 document.addEventListener("DOMContentLoaded", function() {
   buildThemePanel();
   initTema();
+
+  // Botón flotante de temas (estático en el HTML
+  const themeFab = document.querySelector(".theme-fab");
+  if (themeFab) {
+    themeFab.addEventListener("click", togglePanelTemas);
+    themeFab.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") togglePanelTemas();
+    });
+  }
 });

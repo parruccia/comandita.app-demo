@@ -23,7 +23,7 @@
       <span class="header__title" id="pageTitle">Categoría</span>
       <div class="header__right">
         <span class="demo-tag">Demo</span>
-        <button class="cart-btn" onclick="toggleDrawer()" aria-label="Abrir carrito">
+        <button class="cart-btn" aria-label="Abrir carrito">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
           <span class="cart-badge" id="cartBadge">0</span>
         </button>
@@ -33,7 +33,7 @@
 
   <main class="main">
     <div class="category-hero" id="categoryHero">
-      <img class="category-hero__img" id="categoryHeroImg" src="" alt="" />
+      <img class="category-hero__img" id="categoryHeroImg" src="" alt="" fetchpriority="high" decoding="async" />
       <div class="category-hero__overlay">
         <h1 class="category-hero__title" id="categoryTitle"></h1>
       </div>
@@ -43,17 +43,17 @@
     </section>
   </main>
 
-  <div class="sticky-cart" id="stickyCart" onclick="toggleDrawer()">
-    <span class="sticky-cart__info"><strong id="stickyCount">0</strong> items</span>
-    <span class="sticky-cart__total" id="stickyTotal">$0</span>
-    <span class="sticky-cart__cta">Ver mi pedido →</span>
-  </div>
-
-  <a class="admin-fab" href="admin.html" aria-label="Panel de administración" title="Panel admin (demo)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+  <a class="contact-fab" data-contacto href="#" aria-label="Quiero Comanditas para mi negocio">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+    <span>Quiero Comanditas para mi negocio</span>
   </a>
 
-  <div class="theme-fab" onclick="togglePanelTemas()" aria-label="Cambiar estilo del sitio" role="button" tabindex="0" onkeydown="if(event.key==='Enter')togglePanelTemas()">
+  <a class="admin-fab" href="admin.html" aria-label="Panel de administración" title="Panel admin (demo)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    <span>Administración</span>
+  </a>
+
+  <div class="theme-fab" aria-label="Cambiar estilo del sitio" role="button" tabindex="0">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
   </div>
 
@@ -61,12 +61,12 @@
     <span>Demo de presentación &middot; Hecho con <strong>Comanditas</strong></span>
   </footer>
 
-  <div id="overlay" class="overlay" onclick="toggleDrawer()"></div>
+  <div id="overlay" class="overlay"></div>
 
   <aside class="drawer" id="drawer" role="dialog" aria-label="Carrito de compras" aria-modal="true">
     <div class="drawer__header">
       <span class="drawer__title">Tu pedido</span>
-      <button class="drawer__close" onclick="toggleDrawer()" aria-label="Cerrar carrito">&#10005;</button>
+      <button class="drawer__close" aria-label="Cerrar carrito">&#10005;</button>
     </div>
     <div class="drawer__items" id="drawerItems">
       <div class="drawer-empty">Tu carrito está vacío</div>
@@ -77,15 +77,15 @@
         <span>Total</span>
         <span id="drawerTotal">$0</span>
       </div>
-      <button class="drawer__btn" onclick="handleCheckout()">Confirmar pedido</button>
+      <button class="drawer__btn">Confirmar pedido</button>
     </div>
   </aside>
 
-  <div class="modal-overlay" id="modalOverlay" onclick="cerrarModal()"></div>
+  <div class="modal-overlay" id="modalOverlay"></div>
   <div class="modal" id="modalCustom">
     <div class="modal__header">
       <span class="modal__title" id="modalTitle">Personalizar</span>
-      <button class="modal__close" onclick="cerrarModal()" aria-label="Cerrar">&#10005;</button>
+      <button class="modal__close" aria-label="Cerrar">&#10005;</button>
     </div>
     <div class="modal__body" id="modalBody"></div>
     <div class="modal__footer">
@@ -94,8 +94,8 @@
     </div>
   </div>
 
-  <div class="lightbox" id="lightbox" onclick="cerrarLightbox(event)">
-    <button class="lightbox__close" onclick="cerrarLightbox(event)" aria-label="Cerrar imagen">&#10005;</button>
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" aria-label="Cerrar imagen">&#10005;</button>
     <img class="lightbox__img" id="lightboxImg" src="" alt="" />
     <div class="lightbox__name" id="lightboxName"></div>
   </div>

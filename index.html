@@ -21,7 +21,7 @@
       <div class="header__right">
         <span class="demo-tag">Demo</span>
         <span class="hours-pill" id="hoursPill"></span>
-        <button class="cart-btn" onclick="toggleDrawer()" aria-label="Abrir carrito">
+        <button class="cart-btn" aria-label="Abrir carrito">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
           <span class="cart-badge" id="cartBadge">0</span>
         </button>
@@ -37,7 +37,7 @@
       <div class="hero__content">
         <p class="hero__tagline">TU NEGOCIO &middot; TU CIUDAD</p>
         <h1 class="hero__title">Tu comanda,<br/>lista en minutos</h1>
-        <button class="hero__cta" onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">
+        <button class="hero__cta">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           Hacer mi pedido
         </button>
@@ -55,55 +55,39 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- QUICK DATA: Info clave del comercio          -->
-    <!-- ============================================ -->
-    <section class="quick-data">
-      <div class="quick-data__item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span>20-30 min</span>
-      </div>
-      <div class="quick-data__divider"></div>
-      <div class="quick-data__item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Envío o retiro</span>
-      </div>
-      <div class="quick-data__divider"></div>
-      <div class="quick-data__item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span>Cupones activos</span>
-      </div>
-    </section>
-
-    <!-- ============================================ -->
     <!-- HOW IT WORKS: El recorrido del cliente       -->
     <!-- ============================================ -->
     <section class="how-it-works">
-      <h2 class="section-title">Hoy se arma así</h2>
-      <p class="section-subtitle">Elegís, confirmás y lo tenés en minutos</p>
+      <div class="section-header">
+        <span class="section-label">Así funciona</span>
+        <h2 class="section-title">Así es la experiencia que va a tener tu cliente</h2>
+        <p class="section-subtitle">De tocar la pantalla a tener el pedido, sin fricción</p>
+      </div>
       <div class="steps">
         <div class="step">
           <div class="step__number">1</div>
           <div class="step__text">
-            <strong>Armás tu pedido</strong>
-            <span>Elegí lo que querés del menú</span>
+            <strong>Arma su pedido</strong>
+            <span>Elige del menú y personaliza cada producto desde su celular</span>
           </div>
         </div>
         <div class="step">
           <div class="step__number">2</div>
           <div class="step__text">
-            <strong>Confirmás por WhatsApp</strong>
-            <span>Te contactamos al instante</span>
+            <strong>Confirma por WhatsApp</strong>
+            <span>El pedido llega directo a tu WhatsApp, listo para cocinar</span>
           </div>
         </div>
         <div class="step">
           <div class="step__number">3</div>
           <div class="step__text">
-            <strong>Lo retirás o te llega</strong>
-            <span>En minutos, donde estés</span>
+            <strong>Lo retira o le llega</strong>
+            <span>Elige retiro en local o envío, según lo que vos ofrezcas</span>
           </div>
         </div>
       </div>
-      <button class="cta-btn" onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">
+      <p class="how-it-works__note">El envío a domicilio es un servicio externo: vos elegís tu propio repartidor o una plataforma de delivery.</p>
+      <button class="cta-btn">
         Empezar pedido
       </button>
     </section>
@@ -141,7 +125,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
             </div>
             <strong>Pedidos por WhatsApp</strong>
-            <span>Sin apps, sin intermediarios</span>
+            <span>Sin apps, sin comisiones por comanda</span>
           </div>
           <div class="feature">
             <div class="feature__icon">
@@ -152,11 +136,55 @@
           </div>
           <div class="feature">
             <div class="feature__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg>
             </div>
-            <strong>Listo en minutos</strong>
-            <span>Sin demoras, sin fricción</span>
+            <strong>Asistente con IA</strong>
+            <span>Te ayuda a redactar tus productos y te resume cómo viene tu semana</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PRICING CTA: ¿Cuánto cuesta?                  -->
+    <!-- ============================================ -->
+    <section class="pricing-cta">
+      <div class="pricing-cta__inner">
+        <span class="section-label">¿Cuánto cuesta?</span>
+        <h2 class="pricing-cta__title">Comanditas, <em>desde $250.000</em></h2>
+        <p class="pricing-cta__text">Comanditas, desde $250.000 — cotización final a medida de tu negocio.</p>
+        <a class="pricing-cta__btn" data-contacto data-contacto-extra=" (Vengo del link &quot;¿Cuánto cuesta?&quot;)" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          Cotizá la tuya
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ: resolvemos las dudas típicas             -->
+    <!-- ============================================ -->
+    <section class="faq">
+      <div class="faq__inner">
+        <span class="section-label">Preguntas frecuentes</span>
+        <h2 class="section-title">Dudas de último momento</h2>
+        <p class="section-subtitle">Te dejo las respuestas a lo que casi siempre preguntan.</p>
+        <div class="faq__list">
+          <details class="faq-item">
+            <summary>¿En cuánto tiempo tengo mi Comanditas funcionando?</summary>
+            <p>Entre una semana y diez días, depende de cuánto tengas que preparar (fotos de tus productos, precios, carta). Lo importante: mientras tanto vos seguís atendiendo tu local, sin frenar nada.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Necesito saber de tecnología para manejar Comanditas?</summary>
+            <p>Para nada. Si sabés usar WhatsApp, sobra. Cambiar precios, marcar productos agotados o editar tu carta se hace desde un panel re simple, desde el celular.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Qué pasa con mi dominio y hosting?</summary>
+            <p>Me encargo de todo: te dejo Comanditas andando con tu propio link y uno bien simple para compartir en tus redes. No tenés que tocar nada de servidores ni pagar de más por servicios que no usás.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Tiene costo de mantenimiento?</summary>
+            <p>No te voy a cobrar por mes por mantener tu Comanditas ya funcionando. Vemos juntos qué necesitás: si querés que yo me ocupe de actualizaciones, se cotiza aparte y siempre sin sorpresas.</p>
+          </details>
         </div>
       </div>
     </section>
@@ -169,26 +197,29 @@
         <h2 class="final-cta__title">¿Te gusta lo que ves?</h2>
         <p class="final-cta__text">Esta es una demo interactiva. Todo lo que ves acá se adapta al 100% a tu negocio.</p>
         <div class="final-cta__actions">
+          <a class="final-cta__btn final-cta__btn--primary" data-contacto data-contacto-extra=" (Me llegué hasta el final de la demo 👍)" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            Quiero Comanditas para mi negocio
+          </a>
           <a href="admin.html" class="final-cta__btn final-cta__btn--secondary">Ver panel admin →</a>
-          <button class="final-cta__btn final-cta__btn--primary" onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">Probar el menú</button>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- STICKY CART -->
-  <div class="sticky-cart" id="stickyCart" onclick="toggleDrawer()">
-    <span class="sticky-cart__info"><strong id="stickyCount">0</strong> items</span>
-    <span class="sticky-cart__total" id="stickyTotal">$0</span>
-    <span class="sticky-cart__cta">Ver mi pedido →</span>
-  </div>
+  <!-- CONTACT CTA -->
+  <a class="contact-fab" data-contacto href="#" aria-label="Quiero Comanditas para mi negocio">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+    <span>Quiero Comanditas para mi negocio</span>
+  </a>
 
   <!-- FABs -->
   <a class="admin-fab" href="admin.html" aria-label="Panel de administración" title="Panel admin (demo)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    <span>Administración</span>
   </a>
 
-  <div class="theme-fab" onclick="togglePanelTemas()" aria-label="Cambiar estilo del sitio" role="button" tabindex="0" onkeydown="if(event.key==='Enter')togglePanelTemas()">
+  <div class="theme-fab" aria-label="Cambiar estilo del sitio" role="button" tabindex="0">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
   </div>
 
@@ -213,11 +244,11 @@
   </div>
 
   <!-- DRAWER -->
-  <div id="overlay" class="overlay" onclick="toggleDrawer()"></div>
+  <div id="overlay" class="overlay"></div>
   <aside class="drawer" id="drawer" role="dialog" aria-label="Carrito de compras" aria-modal="true">
     <div class="drawer__header">
       <span class="drawer__title">Tu pedido</span>
-      <button class="drawer__close" onclick="toggleDrawer()" aria-label="Cerrar carrito">&#10005;</button>
+      <button class="drawer__close" aria-label="Cerrar carrito">&#10005;</button>
     </div>
     <div class="drawer__items" id="drawerItems">
       <div class="drawer-empty">Tu carrito está vacío</div>
@@ -228,7 +259,7 @@
         <span>Total</span>
         <span id="drawerTotal">$0</span>
       </div>
-      <button class="drawer__btn" onclick="handleCheckout()">Confirmar pedido</button>
+      <button class="drawer__btn">Confirmar pedido</button>
     </div>
   </aside>
 

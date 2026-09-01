@@ -81,25 +81,6 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================ */
-/* QUICK DATA                                   */
-/* ============================================ */
-.quick-data {
-  display: flex; align-items: center; justify-content: center;
-  gap: 0; padding: 1.5rem 1.25rem;
-  max-width: 600px; margin: 0 auto;
-}
-.quick-data__item {
-  display: flex; align-items: center; gap: 0.5rem;
-  padding: 0 1.25rem;
-  font-size: 0.8rem; color: var(--muted); font-weight: 500;
-}
-.quick-data__item svg { width: 16px; height: 16px; stroke: var(--muted); flex-shrink: 0; }
-.quick-data__divider {
-  width: 1px; height: 24px;
-  border-left: 1px dashed rgba(255,255,255,0.15);
-}
-
-/* ============================================ */
 /* HOW IT WORKS                                 */
 /* ============================================ */
 .how-it-works {
@@ -153,6 +134,10 @@ img { max-width: 100%; display: block; }
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,0.12); }
+.how-it-works__note {
+  font-size: 0.72rem; color: var(--muted); line-height: 1.6;
+  max-width: 380px; margin: 0 auto 1.5rem; font-style: italic;
+}
 
 /* ============================================ */
 /* SECTION (menu)                               */
@@ -176,10 +161,10 @@ img { max-width: 100%; display: block; }
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.3s;
 }
 .card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.6); }
-.card__thumb { position: relative; width: 100%; aspect-ratio: 3/2; overflow: hidden; }
-.card__thumb img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.55) saturate(0.9); transition: transform 0.4s ease, filter 0.4s; }
-.card:hover .card__thumb img { transform: scale(1.06); filter: brightness(0.4) saturate(1.1); }
-.card__thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, var(--card-bg) 100%); }
+.card__thumb { position: relative; width: 100%; aspect-ratio: 3/2; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 35%, rgba(37,211,102,0.09), transparent 70%); }
+.card__thumb img { width: 62%; height: 62%; object-fit: contain; padding: 1.25rem; transition: transform 0.4s ease; }
+.card:hover .card__thumb img { transform: scale(1.06); }
+.card__thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 78%, var(--card-bg) 100%); pointer-events: none; }
 .card__bar { position: absolute; left: 0; top: 10%; bottom: 10%; width: 3px; background: var(--accent); border-radius: 0 2px 2px 0; transform: scaleY(0); transform-origin: bottom; transition: transform 0.3s ease; z-index: 2; }
 .card:hover .card__bar { transform: scaleY(1); }
 .card__body { padding: 1rem 1.25rem 1.25rem; flex-shrink: 0; }
@@ -259,14 +244,65 @@ img { max-width: 100%; display: block; }
 .final-cta__btn--secondary:hover { border-color: rgba(255,255,255,0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
 
 /* ============================================ */
-/* STICKY CART                                  */
+/* PRICING CTA (¿Cuánto cuesta?)                */
 /* ============================================ */
-.sticky-cart { position: fixed; bottom: 0; left: 0; right: 0; z-index: 150; background: var(--surface); border-top: 1px solid var(--border); padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1); cursor: pointer; box-shadow: 0 -4px 20px rgba(0,0,0,0.4); }
-.sticky-cart.visible { transform: translateY(0); }
-.sticky-cart__info { font-size: 0.85rem; color: var(--muted); }
-.sticky-cart__info strong { color: var(--text); font-weight: 600; }
-.sticky-cart__total { font-family: var(--font-d); font-size: 1.1rem; font-weight: 700; color: var(--text); }
-.sticky-cart__cta { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.pricing-cta {
+  max-width: 640px; margin: 0 auto; padding: 2.5rem 1.25rem;
+  text-align: center;
+}
+.pricing-cta__inner {
+  background: rgba(37,211,102,0.05);
+  border: 1px dashed rgba(37,211,102,0.35);
+  border-radius: 18px;
+  padding: 2.25rem 1.5rem;
+}
+.pricing-cta__title {
+  font-family: var(--font-d); font-size: 1.4rem; font-weight: 700;
+  margin-bottom: 0.6rem; line-height: 1.25;
+}
+.pricing-cta__title em { color: var(--accent); font-style: normal; white-space: nowrap; }
+.pricing-cta__text {
+  font-size: 0.88rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.7;
+  max-width: 420px; margin-left: auto; margin-right: auto;
+}
+.pricing-cta__btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  background: linear-gradient(135deg, #25D366, #1EBE5A);
+  color: #fff; font-family: var(--font-b); font-size: 0.9rem; font-weight: 700;
+  border-radius: 50px; box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pricing-cta__btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.45); }
+.pricing-cta__btn svg { width: 18px; height: 18px; stroke: #fff; }
+
+/* ============================================ */
+/* FAQ                                          */
+/* ============================================ */
+.faq { max-width: 640px; margin: 0 auto; padding: 1rem 1.25rem 4rem; text-align: center; }
+.faq__list { text-align: left; margin-top: 0.5rem; }
+.faq-item {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border); border-radius: 12px;
+  margin-bottom: 0.6rem; overflow: hidden;
+}
+.faq-item summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-d); font-size: 0.95rem; font-weight: 600;
+  color: var(--text);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+'; font-family: var(--font-b); font-weight: 700; font-size: 1.2rem;
+  color: var(--accent); transition: transform 0.2s; flex-shrink: 0;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p {
+  font-size: 0.85rem; color: var(--muted); line-height: 1.7;
+  padding: 0 1.25rem 1.1rem;
+}
 
 /* ============================================ */
 /* OVERLAY + DRAWER                             */
@@ -306,12 +342,38 @@ img { max-width: 100%; display: block; }
 /* ============================================ */
 /* FABs                                         */
 /* ============================================ */
+/* Grupo de utilidades (tema + admin) abajo-izquierda, apilados */
 .theme-fab { position: fixed; bottom: 1.25rem; left: 1.25rem; width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 100; cursor: pointer; transition: transform 0.2s, border-color 0.3s, background 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
 .theme-fab:hover { transform: scale(1.1); border-color: var(--accent); }
 .theme-fab svg { width: 18px; height: 18px; stroke: var(--accent); }
-.admin-fab { position: fixed; bottom: 1.25rem; left: calc(1.25rem + 56px); width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 100; cursor: pointer; transition: transform 0.2s, border-color 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
-.admin-fab:hover { transform: scale(1.1); border-color: var(--muted); }
-.admin-fab svg { width: 18px; height: 18px; stroke: var(--muted); }
+.admin-fab {
+  position: fixed; bottom: calc(1.25rem + 56px); left: 1.25rem; z-index: 100;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.7rem 1rem;
+  background: var(--surface); border: 1px solid var(--border);
+  font-family: var(--font-b); font-size: 0.78rem; font-weight: 600;
+  color: var(--muted); border-radius: 50px; cursor: pointer; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  transition: transform 0.2s, border-color 0.3s, color 0.3s;
+}
+.admin-fab:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--text); }
+.admin-fab svg { width: 16px; height: 16px; stroke: currentColor; flex-shrink: 0; }
+
+/* ============================================ */
+/* CONTACT FAB (CTA a WhatsApp del dev)         */
+/* ============================================ */
+.contact-fab {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 160;
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  background: linear-gradient(135deg, #25D366, #1EBE5A);
+  color: #fff; font-family: var(--font-b); font-size: 0.88rem; font-weight: 700;
+  border-radius: 50px; box-shadow: 0 8px 28px rgba(37,211,102,0.35), 0 6px 24px rgba(0,0,0,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.contact-fab:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(37,211,102,0.45), 0 10px 30px rgba(0,0,0,0.55); }
+.contact-fab svg { width: 18px; height: 18px; stroke: #fff; flex-shrink: 0; }
+.contact-fab span { white-space: nowrap; }
 
 /* ============================================ */
 /* CLOSED NOTICE                                */
@@ -375,12 +437,14 @@ img { max-width: 100%; display: block; }
   .grid { grid-template-columns: 1fr; gap: 1rem; }
   .hero { padding: 3rem 1rem 2rem; }
   .section { padding: 1.5rem 1rem 3rem; }
-  .quick-data { flex-wrap: wrap; gap: 0.5rem; }
-  .quick-data__divider { display: none; }
-  .quick-data__item { padding: 0.4rem 0.75rem; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px dashed rgba(255,255,255,0.1); }
   .features__grid { grid-template-columns: 1fr; }
-  .theme-fab { bottom: 5rem; }
-  .admin-fab { bottom: 5rem; left: calc(1.25rem + 56px); }
+  .contact-fab {
+    left: 50%; right: auto; transform: translateX(-50%);
+    bottom: 1rem; justify-content: center;
+  }
+  .contact-fab:hover { transform: translateX(-50%) translateY(-2px); }
+  .theme-fab { bottom: 4.5rem; }
+  .admin-fab { bottom: calc(4.5rem + 56px); }
   .demo-notice { padding: 1.25rem 1.25rem; }
   .demo-notice__title { font-size: 0.95rem; }
 }

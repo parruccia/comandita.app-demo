@@ -1,5 +1,5 @@
-var CART_KEY = "comanditas_cart";
-var CART_LOMITOS_KEY = "comanditas_cart_lomitos";
+const CART_KEY = "comanditas_cart";
+const CART_LOMITOS_KEY = "comanditas_cart_lomitos";
 
 function getCart() {
   try { return JSON.parse(localStorage.getItem(CART_KEY)) || {}; }
@@ -24,10 +24,10 @@ function formatPrice(n) {
 }
 
 function toggleDrawer() {
-  var drawer = document.getElementById("drawer");
-  var overlay = document.getElementById("overlay");
+  const drawer = document.getElementById("drawer");
+  const overlay = document.getElementById("overlay");
   if (!drawer || !overlay) return;
-  var isOpen = drawer.classList.contains("open");
+  const isOpen = drawer.classList.contains("open");
   drawer.classList.toggle("open");
   overlay.classList.toggle("open");
   document.body.style.overflow = isOpen ? "" : "hidden";
@@ -35,23 +35,23 @@ function toggleDrawer() {
 }
 
 function showToast(html) {
-  var t = document.getElementById("toast");
+  const t = document.getElementById("toast");
   if (!t) return;
   t.innerHTML = html;
   t.classList.add("show");
-  var dur = Math.max(1200, Math.min(html.length * 25, 3000));
-  setTimeout(function() { t.classList.remove("show"); }, dur);
+  const dur = Math.max(1200, Math.min(html.length * 25, 3000));
+  setTimeout(() => t.classList.remove("show"), dur);
 }
 
 function changeQty(btn, delta) {
-  var wrap = btn.closest(".qty");
-  var name = wrap.dataset.name;
-  var price = parseInt(wrap.dataset.price);
-  var size = wrap.dataset.size || "";
-  var categoria = wrap.dataset.categoria || "";
-  var cart = getCart();
-  var current = cart[name] ? cart[name].qty : 0;
-  var next = current + delta;
+  const wrap = btn.closest(".qty");
+  const name = wrap.dataset.name;
+  const price = parseInt(wrap.dataset.price);
+  const size = wrap.dataset.size || "";
+  const categoria = wrap.dataset.categoria || "";
+  const cart = getCart();
+  const current = cart[name] ? cart[name].qty : 0;
+  let next = current + delta;
   if (next < 0) next = 0;
   if (next > 99) return;
 
@@ -62,25 +62,25 @@ function changeQty(btn, delta) {
   }
   saveCart(cart);
 
-  var display = wrap.querySelector(".qty__display");
+  const display = wrap.querySelector(".qty__display");
   if (display) display.textContent = next;
   updateCartUI();
-  if (delta > 0) showToast("<span>" + name + "</span> agregado");
+  if (delta > 0) showToast(`<span>${name}</span> agregado`);
 }
 
 function agregarLomitoAlCarrito(producto, salsas, toppings) {
-  var precioUnitario = producto.precio;
-  for (var i = 0; i < salsas.length; i++) precioUnitario += salsas[i].precio;
-  for (var j = 0; j < toppings.length; j++) precioUnitario += toppings[j].precio;
+  let precioUnitario = producto.precio;
+  for (const s of salsas) precioUnitario += s.precio;
+  for (const t of toppings) precioUnitario += t.precio;
 
-  var items = salsas.concat(toppings).map(function(x) { return x.nombre; }).sort();
-  var clave = JSON.stringify({ nombre: producto.nombre, size: producto.tamano || "", items: items });
+  const items = salsas.concat(toppings).map((x) => x.nombre).sort();
+  const clave = JSON.stringify({ nombre: producto.nombre, size: producto.tamano || "", items: items });
 
-  var cart = getLomitosCart();
-  var existe = false;
-  for (var k = 0; k < cart.length; k++) {
-    if (cart[k].clave === clave) {
-      cart[k].qty += 1;
+  const cart = getLomitosCart();
+  let existe = false;
+  for (const item of cart) {
+    if (item.clave === clave) {
+      item.qty += 1;
       existe = true;
       break;
     }
@@ -99,17 +99,17 @@ function agregarLomitoAlCarrito(producto, salsas, toppings) {
   }
   saveLomitosCart(cart);
   updateCartUI();
-  showToast("<span>" + producto.nombre + "</span> agregado");
+  showToast(`<span>${producto.nombre}</span> agregado`);
 }
 
 function removeFromLomitos(index) {
-  var cart = getLomitosCart();
+  const cart = getLomitosCart();
   if (cart[index]) {
-    var name = cart[index].nombre;
+    const name = cart[index].nombre;
     cart.splice(index, 1);
     saveLomitosCart(cart);
     updateCartUI();
-    showToast("<span>" + name + "</span> eliminado");
+    showToast(`<span>${name}</span> eliminado`);
   }
 }
 
@@ -120,32 +120,32 @@ function clearCart() {
 }
 
 function getCartCount() {
-  var c = getCart();
-  var l = getLomitosCart();
-  var count = 0;
-  for (var k in c) count += c[k].qty;
-  for (var i = 0; i < l.length; i++) count += l[i].qty;
+  const c = getCart();
+  const l = getLomitosCart();
+  let count = 0;
+  for (const k in c) count += c[k].qty;
+  for (const item of l) count += item.qty;
   return count;
 }
 
 function getCartTotal() {
-  var c = getCart();
-  var l = getLomitosCart();
-  var total = 0;
-  for (var k in c) total += c[k].price * c[k].qty;
-  for (var i = 0; i < l.length; i++) total += l[i].precioUnitario * l[i].qty;
+  const c = getCart();
+  const l = getLomitosCart();
+  let total = 0;
+  for (const k in c) total += c[k].price * c[k].qty;
+  for (const item of l) total += item.precioUnitario * item.qty;
   return total;
 }
 
 function updateCartUI() {
-  var count = getCartCount();
-  var total = getCartTotal();
+  const count = getCartCount();
+  const total = getCartTotal();
 
-  var badge = document.getElementById("cartBadge");
-  var totalEl = document.getElementById("cartTotal");
-  var drawerTotal = document.getElementById("drawerTotal");
-  var drawerItems = document.getElementById("drawerItems");
-  var countEl = document.getElementById("cartCount");
+  const badge = document.getElementById("cartBadge");
+  const totalEl = document.getElementById("cartTotal");
+  const drawerTotal = document.getElementById("drawerTotal");
+  const drawerItems = document.getElementById("drawerItems");
+  const countEl = document.getElementById("cartCount");
 
   if (badge) {
     badge.textContent = count;
@@ -156,40 +156,37 @@ function updateCartUI() {
   if (countEl) countEl.textContent = count + (count === 1 ? " item" : " items");
 
   if (drawerItems) {
-    var html = "";
-    var lomitos = getLomitosCart();
-    var cart = getCart();
+    let html = "";
+    const lomitos = getLomitosCart();
+    const cart = getCart();
 
-    for (var i = 0; i < lomitos.length; i++) {
-      var l = lomitos[i];
-      html += '<div class="drawer-item">' +
-        '<div class="drawer-item__info">' +
-        '<div class="drawer-item__name">' + l.nombre +
-        ' <span class="drawer-item__qty">x' + l.qty + '</span></div>';
+    for (let i = 0; i < lomitos.length; i++) {
+      const l = lomitos[i];
+      let itemHtml = `<div class="drawer-item">
+        <div class="drawer-item__info">
+          <div class="drawer-item__name">${l.nombre} <span class="drawer-item__qty">x${l.qty}</span></div>`;
       if (l.salsas && l.salsas.length > 0) {
-        html += '<div class="drawer-item__detail">Salsas: ' +
-          l.salsas.map(function(s) { return s.nombre; }).join(", ") + '</div>';
+        itemHtml += `<div class="drawer-item__detail">Salsas: ${l.salsas.map((s) => s.nombre).join(", ")}</div>`;
       }
       if (l.toppings && l.toppings.length > 0) {
-        html += '<div class="drawer-item__detail">Toppings: ' +
-          l.toppings.map(function(t) { return t.nombre; }).join(", ") + '</div>';
+        itemHtml += `<div class="drawer-item__detail">Toppings: ${l.toppings.map((t) => t.nombre).join(", ")}</div>`;
       }
-      html += '<div class="drawer-item__price">' + formatPrice(l.precioUnitario * l.qty) + '</div>' +
-        '</div>' +
-        '<button class="drawer-item__remove" onclick="removeFromLomitos(' + i + ')" aria-label="Eliminar">&#10005;</button>' +
-        '</div>';
+      itemHtml += `<div class="drawer-item__price">${formatPrice(l.precioUnitario * l.qty)}</div>
+        </div>
+        <button class="drawer-item__remove" data-remove-lomitos="${i}" aria-label="Eliminar">&#10005;</button>
+      </div>`;
+      html += itemHtml;
     }
 
-    for (var k in cart) {
-      var item = cart[k];
-      html += '<div class="drawer-item">' +
-        '<div class="drawer-item__info">' +
-        '<div class="drawer-item__name">' + item.name +
-        ' <span class="drawer-item__qty">x' + item.qty + '</span></div>' +
-        '<div class="drawer-item__price">' + formatPrice(item.price * item.qty) + '</div>' +
-        '</div>' +
-        '<button class="drawer-item__remove" onclick="removeFromCart(\'' + k.replace(/'/g, "\\'") + '\')" aria-label="Eliminar">&#10005;</button>' +
-        '</div>';
+    for (const k in cart) {
+      const item = cart[k];
+      html += `<div class="drawer-item">
+        <div class="drawer-item__info">
+          <div class="drawer-item__name">${item.name} <span class="drawer-item__qty">x${item.qty}</span></div>
+          <div class="drawer-item__price">${formatPrice(item.price * item.qty)}</div>
+        </div>
+        <button class="drawer-item__remove" data-remove-cart="${k.replace(/'/g, "&apos;")}" aria-label="Eliminar">&#10005;</button>
+      </div>`;
     }
 
     if (count === 0) {
@@ -199,21 +196,21 @@ function updateCartUI() {
     drawerItems.innerHTML = html;
   }
 
-  document.querySelectorAll(".qty").forEach(function(wrap) {
-    var name = wrap.dataset.name;
-    var c = getCart();
-    var display = wrap.querySelector(".qty__display");
+  document.querySelectorAll(".qty").forEach((wrap) => {
+    const name = wrap.dataset.name;
+    const c = getCart();
+    const display = wrap.querySelector(".qty__display");
     if (display && c[name]) display.textContent = c[name].qty;
     else if (display) display.textContent = 0;
   });
 }
 
 function removeFromCart(name) {
-  var cart = getCart();
+  const cart = getCart();
   delete cart[name];
   saveCart(cart);
   updateCartUI();
-  showToast("<span>" + name + "</span> eliminado");
+  showToast(`<span>${name}</span> eliminado`);
 }
 
 function handleCheckout() {
@@ -224,6 +221,39 @@ function handleCheckout() {
   window.location.href = "checkout.html";
 }
 
+function bindCartEvents() {
+  // Botones estáticos que abren/cierran el drawer
+  document.querySelectorAll(".cart-btn, #overlay, .drawer__close").forEach((el) => {
+    el.addEventListener("click", toggleDrawer);
+  });
+  const drawerBtn = document.querySelector(".drawer__btn");
+  if (drawerBtn) drawerBtn.addEventListener("click", handleCheckout);
+
+  // Ítems del carrito (dinámicos)
+  const drawerItems = document.getElementById("drawerItems");
+  if (drawerItems) {
+    drawerItems.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-remove-lomitos], [data-remove-cart]");
+      if (!btn) return;
+      if (btn.hasAttribute("data-remove-lomitos")) {
+        removeFromLomitos(parseInt(btn.dataset.removeLomitos));
+      } else {
+        removeFromCart(btn.dataset.removeCart);
+      }
+    });
+  }
+
+  const productsList = document.getElementById("productsList");
+  if (productsList) {
+    productsList.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-change-qty]");
+      if (!btn) return;
+      changeQty(btn, parseInt(btn.dataset.changeQty));
+    });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+  bindCartEvents();
   updateCartUI();
 });

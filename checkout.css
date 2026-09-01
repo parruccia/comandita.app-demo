@@ -107,9 +107,32 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .theme-fab svg { width: 18px; height: 18px; stroke: var(--accent); }
 
 /* ADMIN FAB */
-.admin-fab { position: fixed; bottom: 1.25rem; left: calc(1.25rem + 56px); width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 100; cursor: pointer; transition: transform 0.2s, border-color 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
-.admin-fab:hover { transform: scale(1.1); border-color: var(--muted); }
-.admin-fab svg { width: 18px; height: 18px; stroke: var(--muted); }
+.admin-fab {
+  position: fixed; bottom: 1.25rem; left: calc(1.25rem + 56px); z-index: 100;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.7rem 1rem;
+  background: var(--surface); border: 1px solid var(--border);
+  font-family: var(--font-b); font-size: 0.78rem; font-weight: 600;
+  color: var(--muted); border-radius: 50px; cursor: pointer; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  transition: transform 0.2s, border-color 0.3s, color 0.3s;
+}
+.admin-fab:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--text); }
+.admin-fab svg { width: 16px; height: 16px; stroke: currentColor; flex-shrink: 0; }
+
+/* CONTACT FAB (CTA a WhatsApp del dev) */
+.contact-fab {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 160;
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.8rem 1.3rem;
+  background: linear-gradient(135deg, #25D366, #1EBE5A);
+  color: #fff; font-family: var(--font-b); font-size: 0.85rem; font-weight: 700;
+  border-radius: 50px; box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.contact-fab:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.55); }
+.contact-fab svg { width: 18px; height: 18px; stroke: #fff; flex-shrink: 0; }
+.contact-fab span { white-space: nowrap; }
 
 /* DEMO TAG */
 .demo-tag { font-family: var(--font-d); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;   color: var(--accent); background: rgba(37,211,102,0.12); padding: 0.2rem 0.5rem; border-radius: 6px; }
@@ -145,6 +168,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .option-btn { padding: 0.6rem; }
   .theme-options { gap: 0.3rem; }
   .theme-swatch { width: 26px; height: 26px; }
+  .contact-fab { right: 0.75rem; padding: 0.7rem 1.1rem; font-size: 0.8rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
