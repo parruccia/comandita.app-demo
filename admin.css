@@ -139,6 +139,11 @@ body {
 .ai-gen-btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
 .ai-gen-btn--loading svg { animation: ai-spin 0.9s linear infinite; }
 @keyframes ai-spin { to { transform: rotate(360deg); } }
+.ai-gen-error {
+  margin: 0 0 0.75rem; font-size: 0.78rem; color: #E53935;
+  background: rgba(229,57,53,0.1); border: 1px solid rgba(229,57,53,0.25);
+  padding: 0.5rem 0.75rem; border-radius: 8px;
+}
 
 /* GRID */
 .admin-grid {

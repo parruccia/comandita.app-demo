@@ -265,46 +265,65 @@ function renderResumenIA() {
     "</strong>. Hay <strong>" + sinVentas + " productos que no se venden hace más de 10 días</strong>: considerá armar un combo o sacarlos del menú.";
 }
 
-function armarDescripcion(nombre, claves) {
-  const palabras = claves
-    .slice(0, 3)
-    .map((c) => c.charAt(0).toUpperCase() + c.slice(1));
-  let lista;
-  if (palabras.length === 1) lista = palabras[0];
-  else if (palabras.length > 1) lista = palabras.slice(0, -1).join(", ") + " y " + palabras[palabras.length - 1];
-  else lista = "Sabor casero";
-  const frases = [
-    "Elaborado con ingredientes seleccionados para que cada bocado sea memorable.",
-    "Ideal para compartir o para darse un gusto sin salir de casa.",
-    "Una opción que nunca falla y que tus clientes van a querer repetir.",
-    "El toque perfecto para completar cualquier pedido."
-  ];
-  const frase = frases[Math.floor(Math.random() * frases.length)];
-  return nombre + ": " + lista + ". " + frase + " Probálo y vas a entender por qué es un favorito.";
-}
-
 function generarDescripcionIA() {
   const btn = document.getElementById("aiGenBtn");
   const nombreEl = document.getElementById("aiProductoNombre");
   const clavesEl = document.getElementById("aiProductoClaves");
   const output = document.getElementById("aiProductoDesc");
   if (!btn || !output || !nombreEl || !clavesEl) return;
-  const nombre = nombreEl.value.trim() || "Este producto";
+
+  const nombre = nombreEl.value.trim();
   const claves = clavesEl.value.split(",").map((s) => s.trim()).filter(Boolean);
+  if (!nombre) {
+    mostrarErrorIA("Escribí el nombre del producto primero.");
+    nombreEl.focus();
+    return;
+  }
+
+  const label = btn.querySelector(".ai-gen-btn__label");
+  ocultarErrorIA();
 
   btn.disabled = true;
   btn.classList.add("ai-gen-btn--loading");
-  const label = btn.querySelector(".ai-gen-btn__label");
   if (label) label.textContent = "Generando...";
   output.value = "Pensando una descripción que venda…";
 
-  setTimeout(() => {
-    output.value = armarDescripcion(nombre, claves);
-    btn.disabled = false;
-    btn.classList.remove("ai-gen-btn--loading");
-    if (label) label.textContent = "Generar con IA";
-    if (output.value && output.scrollIntoView) output.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, 1500);
+  fetch("/api/generate-description", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nombreProducto: nombre, palabrasClave: claves })
+  })
+    .then((res) => res.json().then((data) => ({ ok: res.ok, data: data })))
+    .then(({ ok, data }) => {
+      if (!ok) throw new Error(data.error || "Error");
+      output.value = data.descripcion;
+    })
+    .catch(() => {
+      mostrarErrorIA("No se pudo generar, probá de nuevo.");
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.classList.remove("ai-gen-btn--loading");
+      if (label) label.textContent = "Generar con IA";
+      if (output.value && output.scrollIntoView) output.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+}
+
+function mostrarErrorIA(mensaje) {
+  let err = document.querySelector(".ai-gen-error");
+  if (!err) {
+    err = document.createElement("p");
+    err.className = "ai-gen-error";
+    const btn = document.getElementById("aiGenBtn");
+    const contenedor = btn ? btn.closest(".ai-desc-field") : null;
+    (contenedor || document.body).appendChild(err);
+  }
+  err.textContent = mensaje;
+}
+
+function ocultarErrorIA() {
+  const err = document.querySelector(".ai-gen-error");
+  if (err) err.remove();
 }
 
 document.addEventListener("DOMContentLoaded", function() {
