@@ -260,9 +260,12 @@ function renderResumenIA() {
   const tendencia = Math.random() > 0.2 ? "más" : "menos";
   const sinVentas = window.PRODUCTOS.filter((p) => p.agotado).length || 2;
   el.innerHTML =
-    "Esta semana vendiste <strong>" + cambio + "% " + tendencia +
-    " que la semana pasada</strong>. Tu producto estrella fue <strong>" + estrellaNombre +
-    "</strong>. Hay <strong>" + sinVentas + " productos que no se venden hace más de 10 días</strong>: considerá armar un combo o sacarlos del menú.";
+    '<p class="ai-resumen__line"><span class="ai-resumen__dot"></span>Vendiste <strong>' + cambio + "% " + tendencia +
+    "</strong> que la semana pasada.</p>" +
+    '<p class="ai-resumen__line"><span class="ai-resumen__dot"></span>Tu producto estrella fue <strong>' + estrellaNombre +
+    "</strong>.</p>" +
+    '<p class="ai-resumen__line ai-resumen__line--warn"><span class="ai-resumen__dot"></span><strong>' + sinVentas +
+    "</strong> productos no se venden hace más de 10 días. Considerá armar un combo o sacarlos del menú.</p>";
 }
 
 function generarDescripcionIA() {

@@ -75,6 +75,7 @@ body {
     linear-gradient(180deg, rgba(37,211,102,0.06), rgba(37,211,102,0.02)),
     rgba(255,255,255,0.02);
   overflow: hidden;
+  padding: 1.6rem 1.75rem;
 }
 .admin-card--ai::before {
   content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
@@ -82,7 +83,7 @@ body {
 }
 .admin-card__ai-head {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 0.75rem; margin-bottom: 0.6rem; flex-wrap: wrap;
+  gap: 1rem; margin-bottom: 1.1rem; flex-wrap: wrap;
 }
 .ai-badge {
   display: inline-flex; align-items: center; gap: 0.35rem;
@@ -94,13 +95,27 @@ body {
 .ai-badge svg { width: 13px; height: 13px; stroke: #25D366; }
 .admin-card__ai-title {
   font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; font-weight: 700;
-  letter-spacing: 0.02em; margin-bottom: 0.5rem; color: #E8E4DE;
+  letter-spacing: 0.02em; margin-bottom: 1rem; color: #E8E4DE;
 }
 .admin-card__ai-text {
-  font-size: 0.9rem; line-height: 1.7; color: rgba(232,228,222,0.85);
+  display: flex; flex-direction: column; gap: 0.85rem;
   max-width: 780px;
 }
-.admin-card__ai-text strong { color: #25D366; font-weight: 600; }
+.ai-resumen__line {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  font-size: 0.9rem; line-height: 1.6; color: rgba(232,228,222,0.85);
+  margin: 0;
+}
+.ai-resumen__line strong { color: #25D366; font-weight: 600; }
+.ai-resumen__line--warn strong { color: #FFB74D; }
+.ai-resumen__dot {
+  flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%;
+  margin-top: 0.45em; background: #25D366;
+  box-shadow: 0 0 0 3px rgba(37,211,102,0.15);
+}
+.ai-resumen__line--warn .ai-resumen__dot {
+  background: #FFB74D; box-shadow: 0 0 0 3px rgba(255,183,77,0.15);
+}
 
 /* PRODUCT EDITOR (IA) */
 .admin-card--editor { align-self: start; }

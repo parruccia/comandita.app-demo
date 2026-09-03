@@ -59,6 +59,34 @@
         <p class="admin-card__ai-text" id="aiResumen"></p>
       </section>
 
+      <section class="admin-card admin-card--editor">
+        <div class="admin-card__header">
+          <h2 class="admin-card__title">Cargar producto</h2>
+          <span class="admin-card__tag">Descripción con IA</span>
+        </div>
+        <div class="admin-card__body">
+          <p class="editor-note">Escribí el nombre del producto y 2-3 palabras clave, y el asistente arma una descripción lista para vender.</p>
+          <label class="ai-field">
+            <span class="ai-field__label">Nombre del producto</span>
+            <input class="ai-input" id="aiProductoNombre" type="text" placeholder="Ej: Matambre a la pizza" value="Matambre a la pizza" />
+          </label>
+          <label class="ai-field">
+            <span class="ai-field__label">Palabras clave (separadas por coma)</span>
+            <input class="ai-input" id="aiProductoClaves" type="text" placeholder="Ej: matambre, salsa, queso, crocante" value="matambre, salsa, queso, crocante" />
+          </label>
+          <div class="ai-desc-field">
+            <div class="ai-field__label-row">
+              <span class="ai-field__label">Descripción</span>
+              <button class="ai-gen-btn" id="aiGenBtn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg>
+                <span class="ai-gen-btn__label">Generar con IA</span>
+              </button>
+            </div>
+            <textarea class="ai-input ai-textarea" id="aiProductoDesc" rows="4" placeholder="La descripción va a aparecer acá..."></textarea>
+          </div>
+        </div>
+      </section>
+
       <div class="admin-charts">
         <section class="admin-card">
           <div class="admin-card__header">
@@ -132,34 +160,6 @@
           </div>
           <div class="admin-card__body">
             <div id="menuList"></div>
-          </div>
-        </section>
-
-        <section class="admin-card admin-card--editor">
-          <div class="admin-card__header">
-            <h2 class="admin-card__title">Cargar producto</h2>
-            <span class="admin-card__tag">Descripción con IA</span>
-          </div>
-          <div class="admin-card__body">
-            <p class="editor-note">Escribí el nombre del producto y 2-3 palabras clave, y el asistente arma una descripción lista para vender.</p>
-            <label class="ai-field">
-              <span class="ai-field__label">Nombre del producto</span>
-              <input class="ai-input" id="aiProductoNombre" type="text" placeholder="Ej: Matambre a la pizza" value="Matambre a la pizza" />
-            </label>
-            <label class="ai-field">
-              <span class="ai-field__label">Palabras clave (separadas por coma)</span>
-              <input class="ai-input" id="aiProductoClaves" type="text" placeholder="Ej: matambre, salsa, queso, crocante" value="matambre, salsa, queso, crocante" />
-            </label>
-            <div class="ai-desc-field">
-              <div class="ai-field__label-row">
-                <span class="ai-field__label">Descripción</span>
-                <button class="ai-gen-btn" id="aiGenBtn" type="button">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg>
-                  <span class="ai-gen-btn__label">Generar con IA</span>
-                </button>
-              </div>
-              <textarea class="ai-input ai-textarea" id="aiProductoDesc" rows="4" placeholder="La descripción va a aparecer acá..."></textarea>
-            </div>
           </div>
         </section>
 
