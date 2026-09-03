@@ -71,48 +71,72 @@ export async function onRequestPost(context) {
     "Producto: " + nombreProducto + "\n" +
     "Palabras clave: " + claveTexto;
 
-  try {
-    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + GROQ_API_KEY
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: ejemplo1 },
-          { role: "assistant", content: salida1 },
-          { role: "user", content: ejemplo2 },
-          { role: "assistant", content: salida2 },
-          { role: "user", content: ejemplo3 },
-          { role: "assistant", content: salida3 },
-          { role: "user", content: objetivo }
-        ],
-        temperature: 1.0,
-        max_tokens: 160
-      })
-    });
+  const messages = [
+    { role: "system", content: systemPrompt },
+    { role: "user", content: ejemplo1 },
+    { role: "assistant", content: salida1 },
+    { role: "user", content: ejemplo2 },
+    { role: "assistant", content: salida2 },
+    { role: "user", content: ejemplo3 },
+    { role: "assistant", content: salida3 },
+    { role: "user", content: objetivo }
+  ];
 
-    if (!res.ok) {
-      const texto = await res.text().catch(() => "");
-      console.error("Groq error:", res.status, texto);
-      return json({ error: "El servicio de IA no respondió correctamente." }, 502);
+  // Modelos en orden de preferencia. Si uno no está disponible en la cuenta,
+  // se intenta con el siguiente (autofallback para que la demo nunca falle).
+  const modelos = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
+
+  try {
+    let descripcion = "";
+    let ultimoError = null;
+
+    for (const modelo of modelos) {
+      try {
+        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + GROQ_API_KEY
+          },
+          body: JSON.stringify({
+            model: modelo,
+            messages: messages,
+            temperature: 1.0,
+            max_tokens: 160
+          })
+        });
+
+        if (!res.ok) {
+          const texto = await res.text().catch(() => "");
+          ultimoError = "Groq error (" + modelo + "): " + res.status + " " + texto;
+          console.error(ultimoError);
+          continue;
+        }
+
+        const data = await res.json();
+        const contenido = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content)
+          ? data.choices[0].message.content.trim()
+          : "";
+
+        if (contenido) {
+          descripcion = contenido;
+          break;
+        }
+        ultimoError = "Groq response vacío (" + modelo + ")";
+      } catch (e) {
+        ultimoError = "Groq fetch error (" + modelo + "): " + e.message;
+        console.error(ultimoError);
+      }
     }
 
-    const data = await res.json();
-    const descripcion = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content)
-      ? data.choices[0].message.content.trim()
-      : "";
-
     if (!descripcion) {
-      return json({ error: "No se pudo generar la descripción." }, 502);
+      console.error("Todos los modelos fallaron. Último: " + (ultimoError || "desconocido"));
+      return json({ error: "No se pudo generar, probá de nuevo." }, 502);
     }
 
     return json({ descripcion: descripcion });
   } catch (e) {
-    console.error("Groq fetch error:", e.message);
+    console.error("Groq err:", e.message);
     return json({ error: "No se pudo generar, probá de nuevo." }, 502);
   }
 }
